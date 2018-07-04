@@ -5,17 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-    body{
-        background :skyblue; font-family:Verdana; color:#fff; padding:30px;
-    }
-    h1{
-        font-size:48px; text-transform:uppercase; letter-spacing:2px; text-align:center;
-    }
-    </style>
-
+    <link  href="/assets/style.css" rel="stylesheet" type="text/css"/>
+    
 </head>
 <body>
+
+
+    <% include partials/nav.ejs %>
+
 
     <p>HEy, Your profile name is <%= nameParam %>  </p>
     <p>HEy, Your profile age is <%= dataParam.age %>  </p>

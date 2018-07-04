@@ -361,26 +361,42 @@
 
 
 
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser')
 
-var app = require('express')();
+var urlEncodeParser = bodyParser.urlencoded({ extended: false })
 
 app.set('view engine', 'ejs');
+app.use('/assets', express.static('assets'));
 
 app.get('/', function(req, res){
-    res.send("Hola Batti");
+    res.render("index", { qs: req.query});
+    // console.log(req.query);
+    
 });
+
+app.post('/contact', urlEncodeParser, function(req, res){
+
+    console.log(req.body);
+    
+    res.render("contact-success", { data: req.body});
+});
+
+
+app.get('/contact', function(req, res){
+
+    res.render('contact');
+
+});
+
+
 
 app.get('/home', function(req, res){
 
-    res.sendFile(__dirname+'/index.html');
+    res.render('home');
 
 });
-
-// app.get('/profile/:id', function(req, res){
-
-//     res.send("your id is : "+req.params.id);
-
-// });
 
 app.get('/profile/:name',function(req, res){
 
@@ -388,8 +404,6 @@ app.get('/profile/:name',function(req, res){
     res.render('profile', { nameParam : req.params.name, dataParam : data});
 
 });
-
-
 
 
 app.listen(89);
