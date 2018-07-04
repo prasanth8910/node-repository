@@ -17,12 +17,18 @@
 </head>
 <body>
 
-    <p>Git login form changes</p>
+    <p>HEy, Your profile name is <%= nameParam %>  </p>
+    <p>HEy, Your profile age is <%= dataParam.age %>  </p>
+    <p>HEy, Your profile city is <%= dataParam.city %>  </p>
 
-    <h1>This is the h1 Tag name here</h1>
+   
+    <ul>
+        <% dataParam.hobbies.forEach(function (item){  %>
 
-    <p>THis is the paragraph text here</p>
+            <li> The hobby is <%= item %> </li>
 
-    <!-- <script>alert(new Date().toString())</script> -->
+       <% });  %>
+        
+    </ul>
 </body>
 </html>

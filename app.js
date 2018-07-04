@@ -303,45 +303,93 @@
 // console.log('Started to listening to port : 89');
 
 
-var http = require("http");
-var fs = require("fs");
+// var http = require("http");
+// var fs = require("fs");
 
 
-var server = http.createServer(function (req, res) {
+// var server = http.createServer(function (req, res) {
 
-    console.log("Request has made " + req.url);
+//     console.log("Request has made " + req.url);
 
-    if (req.url === '/home' || req.url === '/') {
+//     if (req.url === '/home' || req.url === '/') {
 
-        // Send data to the Client
-        // res.writeHead(200, { 'ContentType': 'text/html' });
+//         // Send data to the Client
+//         // res.writeHead(200, { 'ContentType': 'text/html' });
 
-        fs.createReadStream(__dirname+'/index.html').pipe(res);
-    }
-    else if(req.url === '/contact'){
+//         fs.createReadStream(__dirname+'/index.html').pipe(res);
+//     }
+//     else if(req.url === '/contact'){
 
-        res.writeHead(200, {'ContentType':'text/html'});
+//         res.writeHead(200, {'ContentType':'text/html'});
 
-        fs.createReadStream(__dirname+'/contact.html').pipe(res);
+//         fs.createReadStream(__dirname+'/contact.html').pipe(res);
 
-    }
-    else if(req.url === '/api/nin'){
+//     }
+//     else if(req.url === '/api/nin'){
 
-        res.writeHead(200, {'ContentType':'text/html'});
-        var ninjas = [{name: 'jack', age:34, job:"waiter"},{name:"david", age:45, job:"Cleaner"}]
+//         res.writeHead(200, {'ContentType':'text/html'});
+//         var ninjas = [{name: 'jack', age:34, job:"waiter"},{name:"david", age:45, job:"Cleaner"}]
    
-        res.end(JSON.stringify(ninjas));
+//         res.end(JSON.stringify(ninjas));
    
-    }else{
+//     }else{
 
-        // res.writeHead(404, {'ContentType':'text/html'});
+//         // res.writeHead(404, {'ContentType':'text/html'});
 
-        fs.createReadStream(__dirname+'/404.html').pipe(res);
-    }
+//         fs.createReadStream(__dirname+'/404.html').pipe(res);
+//     }
 
- });
+//  });
     
-    server.listen(89, '127.0.0.1');
+//     server.listen(89, '127.0.0.1');
 
 
-    console.log('Started to listening to port : 89');
+//     console.log('Started to listening to port : 89');
+
+
+//     var fruits = ["apple",'banana','jack fruit', 'Strawberry','Lychee'];
+
+//     fruits.forEach(function(item){
+
+//         console.log(item);
+        
+
+//     });
+
+
+// var express = require('express');
+
+
+
+
+var app = require('express')();
+
+app.set('view engine', 'ejs');
+
+app.get('/', function(req, res){
+    res.send("Hola Batti");
+});
+
+app.get('/home', function(req, res){
+
+    res.sendFile(__dirname+'/index.html');
+
+});
+
+// app.get('/profile/:id', function(req, res){
+
+//     res.send("your id is : "+req.params.id);
+
+// });
+
+app.get('/profile/:name',function(req, res){
+
+    var data = { age:29, city:"cansas city", hobbies:['cycling','reading','watching','eating','snookling']};
+    res.render('profile', { nameParam : req.params.name, dataParam : data});
+
+});
+
+
+
+
+app.listen(89);
